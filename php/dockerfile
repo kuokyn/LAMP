@@ -2,6 +2,10 @@
 
 FROM php:7.3-apache
 
+# Install mysqli - сервис взаимодействия с бд
+RUN docker-php-ext-install mysqli
+
+
 RUN apt-get update
 
 # Install tools required for build stage
@@ -24,9 +28,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin -
 # Install additional PHP libraries
 # расширения: bcmath - для выполнения мат.операций, pdo_mysql - для работы с бд
 RUN docker-php-ext-install bcmath pdo_mysql
-
-# Install mysqli - сервис взаимодействия с бд
-RUN docker-php-ext-install mysqli
 
 # Install libraries for compiling GD, then build it - поддержка картинок
 # apt-get remove - очистка
