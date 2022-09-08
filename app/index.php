@@ -8,10 +8,10 @@
 <table>
     <tr><th>Id</th><th>Name</th><th>Surname</th></tr>
 <?php
-$mysqli = new mysqli("127.0.0.1", "root", "", "mysqldatabase");
+$mysqli = new mysqli("mysqldb", "root", "root", "mysqldatabase");
 $result = $mysqli->query("SELECT * FROM users");
 foreach ($result as $row){
-    echo "<tr><td>{$row['ID']}</td><td>{$row['name']}</td><td>{$row['surname']}</td></tr>";
+    echo "<tr><td>{$row['id']}</td><td>{$row['name']}</td><td>{$row['surname']}</td></tr>";
 }
 ?>
 </table>
