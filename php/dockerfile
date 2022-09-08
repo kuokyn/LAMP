@@ -1,0 +1,49 @@
+# Базовая конфигурация LAMP for Docker
+
+FROM php:7.3-apache
+
+RUN apt-get update
+
+# Install tools required for build stage
+# bash for bash-shell
+# curl wget rsync - for loading
+# ca-certificates openssl - for supporting https
+# ssh - client
+# tzdata openntpd - timezone and time conf
+RUN apt-get install -fyqq \
+    bash curl wget rsync ca-certificates openssl ssh git tzdata openntpd \
+    libxrender1 fontconfig libc6 \
+    mariadb-client gnupg binutils-gold autoconf \
+    g++ gcc gnupg libgcc1 linux-headers-amd64 make python3
+
+# Install composer - автоматически скачает скрипт пхп и положит в /usr/bin
+# chmod 755 /usr/bin/composer - сделать композер исполняемым
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer \
+ && chmod 755 /usr/bin/composer
+
+# Install additional PHP libraries
+# расширения: bcmath - для выполнения мат.операций, pdo_mysql - для работы с бд
+RUN docker-php-ext-install bcmath pdo_mysql
+
+# Install mysqli - сервис взаимодействия с бд
+RUN docker-php-ext-install mysqli
+
+# Install libraries for compiling GD, then build it - поддержка картинок
+# apt-get remove - очистка
+RUN apt-get install -fyqq libfreetype6 libfreetype6-dev libpng16-16 libpng-dev libjpeg62-turbo libjpeg62-turbo-dev \
+ && docker-php-ext-install gd \
+ && apt-get remove -fyqq libfreetype6-dev libpng-dev libjpeg62-turbo-dev
+
+# Add ZIP archives support
+RUN apt-get install -fyqq zip libzip-dev \
+ && docker-php-ext-install zip \
+ && apt-get remove -fyqq libzip-dev
+
+# Install xdebug
+RUN pecl install xdebug \
+ && docker-php-ext-enable xdebug
+
+# Enable XDebug
+ADD xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+
+WORKDIR /app
