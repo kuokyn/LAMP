@@ -2,36 +2,57 @@ version: "3.5"
 
 services:
 
-  php: #container
-    build:
-      context: php #directory
-    ports:
-      - "8000:80"
-    volumes:
-      -  ./app:/var/www/html #root directory
+#  php: #container
+#    build:
+#      context: php #directory
+#    ports:
+#      - "8000:80"
+#    volumes:
+#      -  ./app/pract_1:/var/www/html
 
-  mysqldb:
-    build:
-      context: db_conf
+  drawer:
+    image: php:7.3-apache
     ports:
-      - "3307:3306"
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: mysqldatabase
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: 0000
+      - "8001:80"
     volumes:
-      - ./mysqldatabase:/var/lib/mysql
+      -  ./app/drawer:/var/www/html
 
-  phpmyadmin:
-    image:   phpmyadmin/phpmyadmin:latest
+  sorter:
+    image: php:7.3-apache
     ports:
-      - "8080:80"
-    environment:
-      PMA_HOST: mysqldb
-      PMA_USER: admin
-      PMA_PASSWORD: 0000
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: mysqldatabase
+      - "8002:80"
+    volumes:
+      -  ./app/sorter:/var/www/html
+
+  informer: #container
+    image: php:7.3-apache
+    ports:
+      - "8003:80"
+    volumes:
+      -  ./app/informer:/var/www/html
+
+#  mysqldb:
+#    build:
+#      context: db_conf
+#    ports:
+#      - "3307:3307"
+#    command: --default-authentication-plugin=mysql_native_password
+#    restart: always
+#    environment:
+#      MYSQL_ROOT_PASSWORD: root
+#      MYSQL_DATABASE: mysqldatabase
+#      MYSQL_USER: admin
+#      MYSQL_PASSWORD: 0000
+#    volumes:
+#      - ./mysqldatabase:/var/lib/mysql
+
+#  phpmyadmin:
+#    image:   phpmyadmin/phpmyadmin:latest
+#    ports:
+#      - "8080:84"
+#    environment:
+#      PMA_HOST: mysqldb
+#      PMA_USER: admin
+#      PMA_PASSWORD: 0000
+#      MYSQL_ROOT_PASSWORD: root
+#      MYSQL_DATABASE: mysqldatabase

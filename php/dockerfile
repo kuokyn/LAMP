@@ -4,7 +4,7 @@ FROM php:7.3-apache
 
 # Install mysqli - сервис взаимодействия с бд
 RUN docker-php-ext-install mysqli
-
+#RUN apt-get install nano
 
 RUN apt-get update
 
