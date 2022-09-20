@@ -40,10 +40,10 @@ if (empty($array)) {
 }
 else {
     if ( count( $array ) === count( array_filter( $array, 'is_numeric' ) ) ) {
-        echo "Original Array :  ";
+        echo "Переданный массив :  ";
         echo implode(', ', $array);
         echo '<br><br>';
-        echo "Sorted Array :  ";
+        echo "Отсортированный массив :  ";
         echo implode(', ', merge_sort($array));
     }
     else {
