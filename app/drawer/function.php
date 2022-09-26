@@ -40,8 +40,8 @@ function drawer()
                 $width >>= 1;
             }
             echo '<b>' . "Переданное число:  " . '</b>' . $num . '<br>';
-            echo '<b>' . "Высота фигуры:  " . '</b>' . $height . '<br>';
-            echo '<b>' . "Ширина фигуры: " . '</b>' . $width . '<br>';
+            echo '<b>' . "Ширина фигуры:  " . '</b>' . $height . '<br>';
+            echo '<b>' . "Высота фигуры: " . '</b>' . $width . '<br>';
             echo '<b>' . "Цвет фигуры (hex):  " . '</b>' . $color . '<br>';
 
             $svg_code = '<svg width = "' . $height . '" height= "' . $width . '">';
@@ -49,27 +49,27 @@ function drawer()
 
                 //Круг
                 case 0:
-                    echo '<b>' ."Форма фигуры:  Круг"  .'</b>'. '<br><br>';
+                    echo '<b>' . "Форма фигуры:  Круг" . '</b>' . '<br><br>';
                     $height = min($height, $width);
                     $svg_code .= '<circle cx="' . $height / 2 . '" cy ="' . $width / 2 . '" r="' . $height / 2 . '" fill = "#' . $color . '" />';
                     break;
 
                 //Эллипс
                 case 1:
-                    echo '<b>' ."Форма фигуры:  Эллипс"  .'</b>'. '<br><br>';
+                    echo '<b>' . "Форма фигуры:  Эллипс" . '</b>' . '<br><br>';
                     $svg_code .= '<ellipse cx="' . $height / 2 . '" cy ="' . $width / 2 . '" rx="' . $height / 2 . '" ry="' . $width / 2 . '" fill = "#' . $color . '" />';
                     break;
 
                 //Квадрат
                 case 2:
-                    echo '<b>' ."Форма фигуры:  Квадрат"  .'</b>'. '<br><br>';
+                    echo '<b>' . "Форма фигуры:  Квадрат" . '</b>' . '<br><br>';
                     $height = min($height, $width);
                     $svg_code .= '<rect x="0" y="0" width="' . $height . '" height="' . $width . '" fill="#' . $color . '" />';
                     break;
 
                 //Прямоугольник
                 case 3:
-                    echo '<b>' ."Форма фигуры:  Прямоугольник"  .'</b>'. '<br><br>';
+                    echo '<b>' . "Форма фигуры:  Прямоугольник" . '</b>' . '<br><br>';
                     $svg_code .= '<rect x="0" y="0" width="' . $height . '" height="' . $width . '" fill="#' . $color . '" />';
                     break;
 
@@ -85,6 +85,12 @@ function drawer()
 
 function paramtohex($number)
 {
+    // strrev — Переворачивает строку задом наперёд
+    // unpack — Распаковать данные из бинарной строки
+    // pack — Упаковать данные в бинарную строку
+    // h* - Hex-строка (Hex string), с нижнего разряда
+    // 'd' - double
+    // [1] - анпак возвращает массив, берём первый элемент
     return strrev(unpack('h*', pack('d', $number))[1]);
 }
 

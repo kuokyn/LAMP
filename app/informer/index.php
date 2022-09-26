@@ -1,6 +1,6 @@
 <html lang="en">
 <head>
-    <title>Hello world page</title>
+    <title>Informer</title>
     <link rel="stylesheet" href="style.css" type="text/css"/>
 </head>
 <body>
@@ -8,6 +8,5 @@
 <?php include 'function.php';
 
 ?>
-
 </body>
 </html>
