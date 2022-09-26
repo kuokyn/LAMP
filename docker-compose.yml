@@ -2,13 +2,21 @@ version: "3.5"
 
 services:
 
-  php: #container
-    build:
-      context: php #directory
+  php-apache: #container
+    build: './php-apache' #directory
     ports:
       - "8000:80"
     volumes:
-      -  ./app:/var/www/html #root directory
+      - ./public_html:/home/public_html #root directory
+
+  nginx: #container
+    build: './nginx'
+    ports:
+      - "8081:80"
+    volumes:
+      - ./nginx-public_html:/home/public_html
+    depends_on:
+      - php-apache
 
   mysqldb:
     build:
