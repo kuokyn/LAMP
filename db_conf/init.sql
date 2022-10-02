@@ -1,6 +1,6 @@
 CREATE DATABASE IF NOT EXISTS mysqldatabase;
-CREATE USER IF NOT EXISTS 'user'@'%' IDENTIFIED BY 'password';
-GRANT SELECT,UPDATE,INSERT ON mysqldatabase.* TO 'user'@'%';
+CREATE USER IF NOT EXISTS 'admin'@'%' IDENTIFIED BY '0000';
+GRANT SELECT,UPDATE,INSERT ON mysqldatabase.* TO 'admin'@'%';
 FLUSH PRIVILEGES;
 
 USE mysqldatabase;

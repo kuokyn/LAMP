@@ -39,7 +39,7 @@ services:
       - "8080:80"
     environment:
       PMA_HOST: mysqldb
-      PMA_USER: user
+      PMA_USER: admin
       PMA_PASSWORD: 0000
       MYSQL_ROOT_PASSWORD: 0000
       MYSQL_DATABASE: mysqldatabase
